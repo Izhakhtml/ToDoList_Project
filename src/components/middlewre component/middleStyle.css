@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.middleWareComp span{
+    font-size: medium;
+}
+.middleWareComp h3{
+    border-bottom:2px solid  white ;
+    margin-left: 20%;
+    margin-right: 20%;
+
+}
+.urgencyAlert{
+    font-size: 11px;
+    background: white;
+    border-radius: 4%;
+    margin-left: 41%;
+    margin-right: 40%;
+    color: red;
+    border: 2px solid red;
+    font-weight: bolder;
+}
+.transferDataToList div{
+    color: black;
+    position: absolute;
+    background: antiquewhite;
+    width: 13vw;
+    left: 10%;
+    border-radius: 7px;
+    border-bottom-right-radius: 0px;
+}
