@@ -4,25 +4,7 @@ import { MissionProvider } from "../../context/TaxtContext";
 import UrgencyTask from "./UrgencyTask";
 import TransferDataToList from './TransferDataToList';
 const MiddlewareComp = () => {
-    const [createTask, setCreateTask] = useState({});
-    const [isChooseUrgencyLevel, setIsChooseurgencyLevel] = useState("");
-    const [catchUrgency, setCatchUrgency] = useState("");
-    const [existTaskInList, setExistTaskInList] = useState("");
-    const { textInput, mission, setMission, storeMission, setStoreMission } = useContext(MissionProvider);
-    useEffect(() => {
-        if (mission.length > 0) {
-            if (createTask.missionName != textInput) {
-                setCreateTask({ urgency: catchUrgency, color: mission[mission.length - 1].color != createTask.color ? createTask.color : mission[mission.length - 1].color, missionName: textInput })
-            }
-        }
-    })
-    useEffect(() => {
-        if (existTaskInList != "") {
-            window.setTimeout(() => {
-                setExistTaskInList("")
-            }, 2000)
-        }
-    }, [existTaskInList])
+    const { createTask, setCreateTask, isChooseUrgencyLevel, setIsChooseurgencyLevel, catchUrgency, setCatchUrgency, existTaskInList, setExistTaskInList, textInput, mission, setMission, storeMission, setStoreMission } = useList();
     const AddToList = () => {
         let bool = null;
         setStoreMission([...storeMission, createTask])
@@ -47,7 +29,6 @@ const MiddlewareComp = () => {
             console.log("true");
         }
     }
-
     const UrgencyFun = (e) => {
         switch (e.target.value) {
             case "רגילה":
@@ -85,3 +66,27 @@ const MiddlewareComp = () => {
     )
 }
 export default MiddlewareComp;
+
+//! CUSTOM HOOK
+function useList() {
+    const [createTask, setCreateTask] = useState({});
+    const [isChooseUrgencyLevel, setIsChooseurgencyLevel] = useState("");
+    const [catchUrgency, setCatchUrgency] = useState("");
+    const [existTaskInList, setExistTaskInList] = useState("");
+    const { textInput, mission, setMission, storeMission, setStoreMission } = useContext(MissionProvider);
+    useEffect(() => {
+        if (mission.length > 0) {
+            if (createTask.missionName != textInput) {
+                setCreateTask({ urgency: catchUrgency, color: mission[mission.length - 1].color != createTask.color ? createTask.color : mission[mission.length - 1].color, missionName: textInput })
+            }
+        }
+    })
+    useEffect(() => {
+        if (existTaskInList != "") {
+            window.setTimeout(() => {
+                setExistTaskInList("")
+            }, 2000)
+        }
+    }, [existTaskInList])
+    return { createTask, setCreateTask, isChooseUrgencyLevel, setIsChooseurgencyLevel, catchUrgency, setCatchUrgency, existTaskInList, setExistTaskInList, textInput, mission, setMission, storeMission, setStoreMission }
+}
